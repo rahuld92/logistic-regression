@@ -20,14 +20,11 @@ print(X)
 
 Y = data[:, -1]
 
-iterations = 100000
+iterations = 10000
 
 model = LogisticRegression(learning_rate=0.1, n_iterations=iterations)
 cost_list = model.train(X, Y)
 
-print(cost_list)
-
-# print(model.costs)
 print(f' Final Weights : {model.weights}')
 
 plt.plot(np.arange(iterations), cost_list)

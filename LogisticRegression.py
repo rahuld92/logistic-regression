@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 
 class LogisticRegression:
@@ -18,12 +19,15 @@ class LogisticRegression:
             linear_model = np.dot(x, self.weights)
             y_predicted = self._sigmoid(linear_model)
 
-            cost = -(1/n_features)*np.sum( y*np.log(y_predicted) + (1-y)*np.log(1-y_predicted))
+            dw = 0
 
-            # Gradient
-            dw = (1 / n_features) * np.dot(x.T, (y_predicted - y))
+            for _ in range(n_samples):
+                dw += (np.dot(x.T, y_predicted - y)) / (1 + np.exp(np.dot(x.T, y_predicted - y)))
+            dw = 1 / n_samples * dw
 
             self.weights -= self.learning_rate * dw
+
+            cost = -(1 / n_samples) * np.sum(y * np.log(y_predicted) + (1 - y) * np.log(1 - y_predicted))
 
             cost_list.append(cost)
 
