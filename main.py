@@ -20,7 +20,7 @@ print(X)
 
 Y = data[:, -1]
 
-iterations = 10000
+iterations = 100000
 
 model = LogisticRegression(learning_rate=0.1, n_iterations=iterations)
 cost_list = model.train(X, Y)

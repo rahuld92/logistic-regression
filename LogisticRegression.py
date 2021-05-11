@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from sklearn.utils import shuffle
 
 
 class LogisticRegression:
@@ -16,13 +17,14 @@ class LogisticRegression:
         cost_list = []
 
         for _ in range(self.n_iterations):
+            x, y = shuffle(x, y)
             linear_model = np.dot(x, self.weights)
             y_predicted = self._sigmoid(linear_model)
 
-            dw = 0
+            # dw = 0
 
-            for _ in range(n_samples):
-                dw += (np.dot(x.T, y_predicted - y)) / (1 + np.exp(np.dot(x.T, y_predicted - y)))
+            # for _ in range(n_samples):
+            dw = (np.dot(x.T, y_predicted - y)) / (1 + np.exp(np.dot(x.T, y_predicted - y)))
             dw = 1 / n_samples * dw
 
             self.weights -= self.learning_rate * dw
